@@ -7,10 +7,12 @@ public class Pole : MonoBehaviour {
     public Pole nastepnik;
     public bool naSkrzyzowaniu;
     public int nrSkrzyzowania;
+    public bool poleNaWieze;
 
     public Pole GetNastepnik()
     {
-        if (this.naSkrzyzowaniu)
+        if (this.poleNaWieze) return null;
+        else if (this.naSkrzyzowaniu)//platformy bez shodow i nie zerowa
         {
             int myplatformID = this.platforma.ID;
             Platforma kolejnaPlatforma = Piramida.singleton.platformy[myplatformID - 1];
@@ -22,19 +24,41 @@ public class Pole : MonoBehaviour {
             }
 
         }
-        else return this.nastepnik;
+        else if (this.platforma.ID % 2 == 0) return this.nastepnik; //platformy bez schodow
+        else
+        {
+            int nastepnePoleCentralneID = 0;
+            //jesli jestem schodkiem 1
+            if (this == this.platforma.schody1)
+                nastepnePoleCentralneID = this.platforma.rotacja;
+            //jesli jestem schodkiem 2
+            else if (this == this.platforma.schody2)
+                nastepnePoleCentralneID = (this.platforma.rotacja + 2) % 4;
+
+            return Piramida.singleton.platformy[this.platforma.ID - 1].polaCentralneScian[nastepnePoleCentralneID];
+        }
 
     }
 
 
 	// Use this for initialization
 	void Start () {
-	
+        this.platforma = transform.parent.GetComponent<Platforma>();
+        Debug.Assert(this.platforma != null);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        Pole localNastepnik = GetNastepnik();
+        if (localNastepnik)
+        {
+            Debug.DrawLine(
+                transform.position,
+                localNastepnik.transform.position,
+                Color.blue,
+                0f,
+                false);
+        }
 	}
 
 
