@@ -1,23 +1,7 @@
 fileFormatVersion: 2
-guid: 77a599bd67f72e24999e1d5d60f433d0
-labels:
-- game
-- bricks
-- magic
-- hardsurface
-- mobile
-- lowpoly
-- building
-- fantasy
-- handpainted
-- defence
-- moba
-- stylize
-- stylized
-- mage
-- tower
-timeCreated: 1452788973
-licenseType: Store
+guid: fc733407b9b894940a9eb04edec7bee0
+timeCreated: 1454169209
+licenseType: Free
 NativeFormatImporter:
   userData: 
   assetBundleName: 

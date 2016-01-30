@@ -7,9 +7,13 @@ public class Piramida : MonoBehaviour {
     public static Piramida singleton;
     public Platforma[] platformy;
 
+    Piramida()
+    {
+        singleton = this;
+    }
+
 	// Use this for initialization
 	void Start () {
-        singleton = this;
 	}
 	
 	// Update is called once per frame

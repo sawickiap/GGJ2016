@@ -8,6 +8,7 @@ public class Pole : MonoBehaviour {
     public bool naSkrzyzowaniu;
     public int nrSkrzyzowania;
     public bool poleNaWieze;
+    public bool isSchody;
 
     public Pole GetNastepnik()
     {
