@@ -1,0 +1,22 @@
+These assets were developed by Marcio Meireles de Castro from Infinita Studio.
+
+
+They are free to use and the inclusion of credits in the project is optional, although it would be nice if you insert it ;)
+
+
+The package includes:
+
+2 diffuse textures (be careful to change them if you rename or reassign on the .Blend file)
+
+1 normal map texture
+
+1 specullar texture
+
+1 ambient occlusion baked image
+
+Any doubts you contact me on www.infinitastudio.com
+
+Cheers!
+
+2015 | Marcio Meireles
+       www.infinitastudio.com
