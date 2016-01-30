@@ -44,6 +44,8 @@ public class WarriorAnimationDemoFREE : MonoBehaviour
             else
                 StartCoroutine(COStunPause(.6f));
 
+            isAttacking = false;
+
         }
 
 		//UpdateMovement();  //update character position and facing
