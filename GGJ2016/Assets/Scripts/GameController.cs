@@ -4,12 +4,16 @@ using System.Collections;
 public class GameController : MonoBehaviour
 {
 
-    private Piramida pyramid;
+    public TowerFieldsHighlight towerFieldsHighlight;
+    public Piramida pyramid;
 
 	// Use this for initialization
 	void Start ()
     {
-        pyramid = GetComponent<Piramida>();
+
+        //pyramid = GetComponent<Piramida>();
+        //towerFieldsHighlight.HighlightTowerPossibleFields(pyramid);
+
 	}
 	
 	// Update is called once per frame

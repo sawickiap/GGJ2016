@@ -2,18 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Piramida : MonoBehaviour {
+public class Piramida : MonoBehaviour
+{
 
     public static Piramida singleton;
     public Platforma[] platformy;
 
-    Piramida()
+    public Piramida()
     {
         singleton = this;
     }
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
+
+        singleton = this;
+
 	}
 	
 	// Update is called once per frame

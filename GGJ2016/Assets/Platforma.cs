@@ -22,13 +22,16 @@ public class Platforma : MonoBehaviour
     private Quaternion sourceRotation;
     private float rotationStartTime;
 
+
+    public Platforma()
+    {
+    }
+
 	// Use this for initialization
 	void Start ()
     {
-
         fields = GetComponents<Pole>();
         lastRotacja = rotacja;
-
 	}
 
 	// Update is called once per frame
