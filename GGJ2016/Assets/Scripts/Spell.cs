@@ -11,12 +11,14 @@ namespace Assets.Scripts
 
         public Tower tower;
         public Enemy targetEnemy;
+        public float movementSpeed;
 
-        public Spell( Enemy targetEnemy, Tower tower )
+        public Spell( Enemy targetEnemy, Tower tower, float movementSpeed )
         {
 
             this.targetEnemy = targetEnemy;
             this.tower = tower;
+            this.movementSpeed = movementSpeed;
 
         }
 
@@ -36,13 +38,27 @@ namespace Assets.Scripts
                 if( distanceDiff < 0.1f )
                 {
                     Destroy(this.gameObject);
+
+                    targetEnemy.health -= tower.damage;
+
+                    if (targetEnemy.health < 0)
+                    {
+                        Destroy(targetEnemy.gameObject);
+                    }
+
+                    tower.gameController.enemies.Remove(targetEnemy);
+
                 }
                 else
                 {
-                    Vector3 newSpellPos = spellPos + tower.fireSpeed / 100.0f * distanceDiffVector;
+                    Vector3 newSpellPos = spellPos + movementSpeed * distanceDiffVector.normalized * Time.deltaTime;
                     this.gameObject.transform.position = newSpellPos;
                 }
 
+            }
+            else
+            {
+                Destroy(this.gameObject);
             }
             
 

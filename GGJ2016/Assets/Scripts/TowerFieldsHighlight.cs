@@ -8,6 +8,7 @@ public class TowerFieldsHighlight : MonoBehaviour
 
     public Piramida pyramid;
     LinkedList<GameObject> gameBlocks;
+    public GameController gameController;
 
     Material highlightedMat;
     Material unhighlightedMat;
@@ -172,6 +173,7 @@ public class TowerFieldsHighlight : MonoBehaviour
             }
 
             Tower newTower = Instantiate(tower, towerPos, towerRotation) as Tower;
+
             currentRaytracedField.tower = tower;
             renderer.material = unhighlightedMat;
             lastRaytracedField = null;
