@@ -104,7 +104,7 @@ public class Enemy : MonoBehaviour
         if (nextPole.isSchody)
         {
             currentDirection.y = startDirection.y;
-            const float threshold = 0.8f;
+            const float threshold = 0.6f;
             if(currentPercentOfPole > threshold)
             {
                 currentDirection.y = Mathf.Lerp(startDirection.y, endDirection.y,

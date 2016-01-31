@@ -18,6 +18,8 @@ public class TowerFieldsHighlight : MonoBehaviour
     public Tower cannonTower;
     public Tower mageTower;
 
+    public Material normalMaterial;
+
     Pole lastRaytracedField;
 
 	// Use this for initialization
@@ -99,7 +101,7 @@ public class TowerFieldsHighlight : MonoBehaviour
             {
                 if(lastRaytracedField)
                 {
-                    lastRaytracedField.GetComponent<Renderer>().material = unhighlightedMat;
+                    lastRaytracedField.GetComponent<Renderer>().material = normalMaterial;
                 }
                 lastRaytracedField = currentRaytracedField;
             }
@@ -179,7 +181,7 @@ public class TowerFieldsHighlight : MonoBehaviour
             tower.fireSpeed = 0.5f;
 
             currentRaytracedField.tower = tower;
-            renderer.material = unhighlightedMat;
+            renderer.material = normalMaterial;
             lastRaytracedField = null;
             newTower.gameObject.transform.parent = currentRaytracedField.transform;
         }
