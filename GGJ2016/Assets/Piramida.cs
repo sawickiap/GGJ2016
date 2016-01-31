@@ -43,6 +43,12 @@ public class Piramida : MonoBehaviour {
 	}
 	
 	public int advancement = 0;
+
+    public void IncreaseAdvancement()
+    {
+        if (advancement < 9)
+            ++advancement;
+    }
 	
 	public void setAdvancement(int advancement){
 		switch (advancement){
