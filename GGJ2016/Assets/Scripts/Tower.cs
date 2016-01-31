@@ -18,7 +18,7 @@ namespace Assets.Scripts
         };
 
         public int damage;
-        public int fireSpeed;
+        public float fireSpeed;
         TowerType towerType;
         public float range;
 
@@ -27,6 +27,13 @@ namespace Assets.Scripts
 
         private LinkedList<GameObject> shootedSpells;
         public GameController gameController;
+
+        float nextFireTime;
+
+        void Start()
+        {
+            nextFireTime = Time.time + fireSpeed;
+        }
 
         public Tower( int damage, int fireSpeed, TowerType towerType )
         {
@@ -40,13 +47,24 @@ namespace Assets.Scripts
         
         void Update()
         {
-
-            Enemy nearestEnemyInRange = FindNearestEnemyInRange();
-
-            if (nearestEnemyInRange != null)
+            
+            if( Time.time > nextFireTime )
             {
-                Shoot(nearestEnemyInRange);
+
+                Enemy nearestEnemyInRange = FindNearestEnemyInRange();
+
+                Debug.Log(nearestEnemyInRange);
+
+                if (nearestEnemyInRange != null)
+                {
+                    Shoot(nearestEnemyInRange);
+                }
+
+                nextFireTime += fireSpeed;
+
             }
+
+            
 
         }
 
@@ -111,7 +129,13 @@ namespace Assets.Scripts
 
             if (towerToEnemyDistance <= range)
             {
-                Instantiate(spell, towerPos, Quaternion.Euler(0, 0, 0));
+                Spell newSpell = Instantiate(spell, towerPos, Quaternion.Euler(0, 0, 0)) as Spell;
+                if( newSpell != null )
+                {
+                    newSpell.tower = this;
+                    newSpell.targetEnemy = enemy;
+                    newSpell.movementSpeed = 2;
+                }
             }
 
         }
