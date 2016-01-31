@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts;
 
 public class GameController : MonoBehaviour
 {
@@ -10,18 +11,17 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-
-        //pyramid = GetComponent<Piramida>();
-        //towerFieldsHighlight.HighlightTowerPossibleFields(pyramid);
-
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-	    
-        //TowerFieldsHighlight
+
+        towerFieldsHighlight.GenerateTowers();
 
 	}
+
+
+    
 
 }

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Pole : MonoBehaviour {
+public class Pole : MonoBehaviour
+{
 
     public Platforma platforma;
     public Pole nastepnik;
@@ -9,6 +10,8 @@ public class Pole : MonoBehaviour {
     public int nrSkrzyzowania;
     public bool poleNaWieze;
     public bool isSchody;
+
+    //public GameObject 
 
     public Pole GetNastepnik()
     {

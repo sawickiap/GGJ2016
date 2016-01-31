@@ -1,0 +1,139 @@
+fileFormatVersion: 2
+guid: 2056e4dc01e7a1741a3545fb51a1519c
+timeCreated: 1454183035
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ST-BLUE
+    100002: ST-BRONZ
+    100004: ST-FLOOR
+    100006: ST-FRONT
+    100008: ST-GLASS
+    100010: ST-HANDG
+    100012: ST-LARGE
+    100014: ST-LEON
+    100016: ST-MAIN
+    100018: ST-METAL
+    100020: ST-ROWS
+    100022: ST-STICK
+    100024: ST-WOOD
+    100026: //RootNode
+    400000: ST-BLUE
+    400002: ST-BRONZ
+    400004: ST-FLOOR
+    400006: ST-FRONT
+    400008: ST-GLASS
+    400010: ST-HANDG
+    400012: ST-LARGE
+    400014: ST-LEON
+    400016: ST-MAIN
+    400018: ST-METAL
+    400020: ST-ROWS
+    400022: ST-STICK
+    400024: ST-WOOD
+    400026: //RootNode
+    2300000: ST-BLUE
+    2300002: ST-BRONZ
+    2300004: ST-FLOOR
+    2300006: ST-FRONT
+    2300008: ST-GLASS
+    2300010: ST-HANDG
+    2300012: ST-LARGE
+    2300014: ST-LEON
+    2300016: ST-MAIN
+    2300018: ST-METAL
+    2300020: ST-ROWS
+    2300022: ST-STICK
+    2300024: ST-WOOD
+    3300000: ST-BLUE
+    3300002: ST-BRONZ
+    3300004: ST-FLOOR
+    3300006: ST-FRONT
+    3300008: ST-GLASS
+    3300010: ST-HANDG
+    3300012: ST-LARGE
+    3300014: ST-LEON
+    3300016: ST-MAIN
+    3300018: ST-METAL
+    3300020: ST-ROWS
+    3300022: ST-STICK
+    3300024: ST-WOOD
+    4300000: ST-WOOD
+    4300002: ST-ROWS
+    4300004: ST-METAL
+    4300006: ST-LEON
+    4300008: ST-LARGE
+    4300010: ST-HANDG
+    4300012: ST-GLASS
+    4300014: ST-FRONT
+    4300016: ST-FLOOR
+    4300018: ST-BRONZ
+    4300020: ST-BLUE
+    4300022: ST-MAIN
+    4300024: ST-STICK
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
