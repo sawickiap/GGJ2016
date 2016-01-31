@@ -9,6 +9,9 @@ public class TowerFieldsHighlight : MonoBehaviour
     public Piramida pyramid;
     LinkedList<GameObject> gameBlocks;
 
+    Material highlightedMat;
+    Material unhighlightedMat;
+
     public Tower fireTower;
     public Tower ghostTower;
     public Tower cannonTower;
@@ -20,12 +23,13 @@ public class TowerFieldsHighlight : MonoBehaviour
 
         // Change color of field.
         Shader fieldShader = Shader.Find("Standard");
-        Material towerFieldHighlightedMat = new Material(fieldShader);
+        highlightedMat = new Material(fieldShader);
+        highlightedMat.color = Color.blue;
 
-        towerFieldHighlightedMat.color = Color.blue;
-
-        Renderer renderer = currentRaytracedField.gameObject.GetComponent<Renderer>();
-        renderer.material = towerFieldHighlightedMat;
+        // Change color of field.
+        Shader fieldShader2 = Shader.Find("Standard");
+        unhighlightedMat = new Material(fieldShader2);
+        unhighlightedMat.color = Color.white;
 
 	}
 	
@@ -89,8 +93,9 @@ public class TowerFieldsHighlight : MonoBehaviour
                 return;
             }
 
-            
 
+            Renderer renderer = currentRaytracedField.gameObject.GetComponent<Renderer>();
+            renderer.material = highlightedMat;
 
             if (!Input.GetMouseButtonDown(0))
             {
@@ -151,15 +156,8 @@ public class TowerFieldsHighlight : MonoBehaviour
             }
 
             Instantiate(tower, towerPos, towerRotation);
-
-            // Change color of field.
-            Shader fieldShader2 = Shader.Find("Standard");
-            Material towerFieldHighlightedMat2 = new Material(fieldShader2);
-
-            towerFieldHighlightedMat2.color = Color.white;
-
-            Renderer renderer2 = currentRaytracedField.gameObject.GetComponent<Renderer>();
-            renderer2.material = towerFieldHighlightedMat2;
+            
+            renderer.material = unhighlightedMat;
 
         }
 
