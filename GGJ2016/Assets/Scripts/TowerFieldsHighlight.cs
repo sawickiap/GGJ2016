@@ -174,6 +174,10 @@ public class TowerFieldsHighlight : MonoBehaviour
 
             Tower newTower = Instantiate(tower, towerPos, towerRotation) as Tower;
 
+            tower.gameController = gameController;
+            tower.range = 100;
+            tower.fireSpeed = 0.5f;
+
             currentRaytracedField.tower = tower;
             renderer.material = unhighlightedMat;
             lastRaytracedField = null;
