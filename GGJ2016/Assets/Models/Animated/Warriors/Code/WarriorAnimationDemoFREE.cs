@@ -10,8 +10,10 @@ public class WarriorAnimationDemoFREE : MonoBehaviour
 	Vector3 inputVec;
 	Vector3 targetDirection;
 
-    float speed = 0.0f;
+    private float speed = 0.0f;
+    private float previousSpeed = 0.0f;
     public bool isAttacking = false;
+    private Enemy enemy;
 	
 	//Warrior types
 	public enum Warrior{Karate, Ninja, Brute, Sorceress,
@@ -20,17 +22,29 @@ public class WarriorAnimationDemoFREE : MonoBehaviour
 
 	public Warrior warrior;
 	
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        enemy = GetComponent<Enemy>();
+    }
+
 	void Update()
 	{
+
+        if (enemy != null)
+        {
+            this.speed = enemy.Speed;
+        }
 
         if( Input.GetKeyDown(KeyCode.Space) )
         {
             isAttacking = true;
         }
 
-        if( speed > 0 )
+        if( speed > 0 && previousSpeed <= 0 )
         {
-            animator.SetBool("Running", true);
+            animator.SetFloat("Speed", speed);
+            previousSpeed = speed;
         }
 
         if( isAttacking )

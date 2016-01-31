@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts;
 
 public class Pole : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Pole : MonoBehaviour
     public int nrSkrzyzowania;
     public bool poleNaWieze;
     public bool isSchody;
+
+    public Tower tower;
 
     //public GameObject 
 
