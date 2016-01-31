@@ -4,6 +4,7 @@ using System.Collections;
 public class Enemy : MonoBehaviour {
 
     public float Speed = 0.5f; //pola/sekunde
+    public float offsetY = 0.51f;
 
     private Pole currPole;
     private Pole nextPole;
@@ -28,7 +29,7 @@ public class Enemy : MonoBehaviour {
                     nextPole = currPole.GetNastepnik();
                     endDirection = nextPole.transform.position - currPole.transform.position;
                     startDirection = endDirection;//wartosc umowna, moze wymyslimy lepiej z poprzednika;
-                    endPosition = (currPole.transform.position + nextPole.transform.position)*0.5f + new Vector3(0f, 0.75f, 0f);
+                    endPosition = (currPole.transform.position + nextPole.transform.position)*0.5f + new Vector3(0f, offsetY, 0f);
                     startPosition = endPosition - endDirection;
                     currentPercentOfPole = 0.5f;
                 }
@@ -49,7 +50,7 @@ public class Enemy : MonoBehaviour {
             startPosition = endPosition;
             currPole = nextPole;
             nextPole = currPole.GetNastepnik();
-            endPosition = (currPole.transform.position + nextPole.transform.position) * 0.5f + new Vector3(0f, 0.75f, 0f);
+            endPosition = (currPole.transform.position + nextPole.transform.position) * 0.5f + new Vector3(0f, offsetY, 0f);
             endDirection = nextPole.transform.position - currPole.transform.position;
 
             if (nextPole.isSchody) //jesli to schody
