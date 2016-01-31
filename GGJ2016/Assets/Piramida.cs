@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Piramida : MonoBehaviour {
-
-    public static Piramida singleton;
-    public Platforma[] platformy;
-
+	
+	public static Piramida singleton;
+	public Platforma[] platformy;
+	
 	const int maxLevel = 2;
 	public float currentHeight; //publc, only for read so that enemies can check it and update own height
-
+	
 	public int currentLevel;
-
+	
 	public int GetLevel(){
 		return currentLevel;
 		currentLevel = 0;
@@ -41,27 +41,102 @@ public class Piramida : MonoBehaviour {
 	public void setRotationOfLevel(int level, int rotation){
 		this.platformy[level*2].rotacja = rotation;
 	}
-
+	
+	public int advancement = 0;
+	
+	public void setAdvancement(int advancement){
+		switch (advancement){
+		case 0:
+			SetLevel(0);
+			setRotationOfLevel(0,0);
+			setRotationOfLevel(1,0);
+			setRotationOfLevel(2,0);
+			break;
+		case 1:
+			SetLevel(0);
+			setRotationOfLevel(0,1);
+			setRotationOfLevel(1,0);
+			setRotationOfLevel(2,0);
+			break;
+		case 2:
+			SetLevel(1);
+			setRotationOfLevel(0,2);
+			setRotationOfLevel(1,0);
+			setRotationOfLevel(2,0);
+			break;
+		case 3:
+			SetLevel(1);
+			setRotationOfLevel(0,3);
+			setRotationOfLevel(1,0);
+			setRotationOfLevel(2,0);
+			break;
+		case 4:
+			SetLevel(1);
+			setRotationOfLevel(0,3);
+			setRotationOfLevel(1,1);
+			setRotationOfLevel(2,0);
+			break;
+		case 5:
+			SetLevel(1);
+			setRotationOfLevel(0,0);
+			setRotationOfLevel(1,1);
+			setRotationOfLevel(2,0);
+			break;
+		case 6:
+			SetLevel(2);
+			setRotationOfLevel(0,0);
+			setRotationOfLevel(1,0);
+			setRotationOfLevel(2,0);
+			break;
+		case 7:
+			SetLevel(2);
+			setRotationOfLevel(0,1);
+			setRotationOfLevel(1,0);
+			setRotationOfLevel(2,0);
+			break;
+		case 8:
+			SetLevel(2);
+			setRotationOfLevel(0,2);
+			setRotationOfLevel(1,1);
+			setRotationOfLevel(2,0);
+			break;
+		case 9:
+			SetLevel(2);
+			setRotationOfLevel(0,3);
+			setRotationOfLevel(1,2);
+			setRotationOfLevel(2,1);
+			break;
+		default:
+			SetLevel(0);
+			setRotationOfLevel(0,0);
+			setRotationOfLevel(1,0);
+			setRotationOfLevel(2,0);
+			break;
+		}
+		
+	}
+	
 	//---------------------------------------------------------
-
-    Piramida()
-    {
-        singleton = this;
-    }
-
+	
+	Piramida()
+	{
+		singleton = this;
+	}
+	
 	// Use this for initialization
 	void Start () {
 		currentLevel = 0;
 	}
-
+	
 	bool isMoving = false;
 	int previousLevel = 0;
 	public float timePerLevel = 2.0f;
 	float movingStartTime;
-
-
+	
+	
 	// Update is called once per frame
 	void Update () {
+		setAdvancement(advancement);
 		if(currentLevel != previousLevel){
 			if(!isMoving){
 				movingStartTime = Time.realtimeSinceStartup;
@@ -77,12 +152,12 @@ public class Piramida : MonoBehaviour {
 				new Vector3(0.0f,previousLevel*2.0f,0.0f),
 				new Vector3(0.0f,(previousLevel+Mathf.Sign(currentLevel-previousLevel))*2.0f,0.0f),
 				progress);
-
+			
 		}
 		else{
 			isMoving = false;
 			transform.position = new Vector3(0.0f,currentLevel*2.0f,0.0f);
 		}
-	
+		
 	}
 }
