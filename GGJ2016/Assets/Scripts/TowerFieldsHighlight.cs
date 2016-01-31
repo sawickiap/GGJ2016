@@ -172,11 +172,11 @@ public class TowerFieldsHighlight : MonoBehaviour
 
             }
 
-            Instantiate(tower, towerPos, towerRotation);
+            Tower newTower = Instantiate(tower, towerPos, towerRotation) as Tower;
             currentRaytracedField.tower = tower;
             renderer.material = unhighlightedMat;
             lastRaytracedField = null;
-            //tower.gameObject.transform.parent 
+            newTower.gameObject.transform.parent = currentRaytracedField.transform;
         }
 
     }

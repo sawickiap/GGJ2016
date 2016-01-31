@@ -4,7 +4,7 @@ using System.Collections;
 public class Camera2 : MonoBehaviour {
 
     private float radius = 0f;
-    private float y = 0f;
+    private float y = 1f;
     private float angle = 33f;
     public float RotationSpeed = 90f;
     public Vector3 TargetPos = new Vector3(0f, -1f, 0f);
