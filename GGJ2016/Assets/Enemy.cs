@@ -1,7 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour
+{
+
+    public enum EnemyType
+    {
+        KNIGHT = 0,
+        HAMMER_MAN = 1,
+        SPEAR_MAN = 2
+    };
 
     public float Speed = 0.5f; //pola/sekunde
     public float offsetY = 0.51f;
@@ -14,8 +22,17 @@ public class Enemy : MonoBehaviour {
     Vector3 currentDirection, currentPosition;
     float currentPercentOfPole;
 
+    public EnemyType enemyType;
+    public int health;
+    public int damage;
+
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+
+        // Initiate Enemy
+
+
         RaycastHit raycastHit;
         if (Physics.Raycast(new Ray(transform.position, Physics.gravity), out raycastHit))
         {
@@ -39,7 +56,9 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+
         float deltaPercentOfPole = Speed * Time.deltaTime;
         if (currPole.isSchody) deltaPercentOfPole *= 0.5f;
         currentPercentOfPole += deltaPercentOfPole;
@@ -154,4 +173,5 @@ public class Enemy : MonoBehaviour {
                 0f,
                 false);
     }
+
 }
