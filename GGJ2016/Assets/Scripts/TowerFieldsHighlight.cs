@@ -86,7 +86,6 @@ public class TowerFieldsHighlight : MonoBehaviour
     {
 
         Pole currentRaytracedField = GetCurrentlyRaytracedField();
-
         if (currentRaytracedField != null)
         {
 
@@ -172,9 +171,11 @@ public class TowerFieldsHighlight : MonoBehaviour
 
             }
 
-            Instantiate(tower, towerPos, towerRotation);
+            Tower newTower = Instantiate(tower, towerPos, towerRotation) as Tower;
             currentRaytracedField.tower = tower;
-            //tower.gameObject.transform.parent 
+            renderer.material = unhighlightedMat;
+            lastRaytracedField = null;
+            newTower.gameObject.transform.parent = currentRaytracedField.transform;
         }
 
     }
