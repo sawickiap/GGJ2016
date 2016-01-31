@@ -86,7 +86,6 @@ public class TowerFieldsHighlight : MonoBehaviour
     {
 
         Pole currentRaytracedField = GetCurrentlyRaytracedField();
-
         if (currentRaytracedField != null)
         {
 
