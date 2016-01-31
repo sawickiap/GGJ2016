@@ -111,7 +111,12 @@ namespace Assets.Scripts
 
             if (towerToEnemyDistance <= range)
             {
-                Instantiate(spell, towerPos, Quaternion.Euler(0, 0, 0));
+                Spell newSpell = Instantiate(spell, towerPos, Quaternion.Euler(0, 0, 0)) as Spell;
+                if( newSpell != null )
+                {
+                    newSpell.tower = this;
+                    newSpell.targetEnemy = enemy;
+                }
             }
 
         }
