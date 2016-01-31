@@ -53,8 +53,6 @@ namespace Assets.Scripts
 
                 Enemy nearestEnemyInRange = FindNearestEnemyInRange();
 
-                Debug.Log(nearestEnemyInRange);
-
                 if (nearestEnemyInRange != null)
                 {
                     Shoot(nearestEnemyInRange);
