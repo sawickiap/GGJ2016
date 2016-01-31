@@ -17,6 +17,8 @@ public class TowerFieldsHighlight : MonoBehaviour
     public Tower cannonTower;
     public Tower mageTower;
 
+    Pole lastRaytracedField;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -93,6 +95,14 @@ public class TowerFieldsHighlight : MonoBehaviour
                 return;
             }
 
+            if(currentRaytracedField != lastRaytracedField)
+            {
+                if(lastRaytracedField)
+                {
+                    lastRaytracedField.GetComponent<Renderer>().material = unhighlightedMat;
+                }
+                lastRaytracedField = currentRaytracedField;
+            }
 
             Renderer renderer = currentRaytracedField.gameObject.GetComponent<Renderer>();
             renderer.material = highlightedMat;
@@ -156,9 +166,6 @@ public class TowerFieldsHighlight : MonoBehaviour
             }
 
             Instantiate(tower, towerPos, towerRotation);
-            
-            renderer.material = unhighlightedMat;
-
         }
 
     }
