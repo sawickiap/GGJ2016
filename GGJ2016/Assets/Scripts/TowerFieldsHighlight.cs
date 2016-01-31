@@ -88,7 +88,13 @@ public class TowerFieldsHighlight : MonoBehaviour
         if (currentRaytracedField != null)
         {
 
-            if (!currentRaytracedField.poleNaWieze)
+            if (!currentRaytracedField.poleNaWieze )
+            {
+                return;
+            }
+
+            // If there is some tower on the field - don't add new tower here.
+            if( currentRaytracedField.tower != null )
             {
                 return;
             }
@@ -156,6 +162,8 @@ public class TowerFieldsHighlight : MonoBehaviour
             }
 
             Instantiate(tower, towerPos, towerRotation);
+            currentRaytracedField.tower = tower;
+            //tower.gameObject.transform.parent 
             
             renderer.material = unhighlightedMat;
 
