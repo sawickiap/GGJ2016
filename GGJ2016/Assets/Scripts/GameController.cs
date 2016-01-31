@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     public TowerFieldsHighlight towerFieldsHighlight;
     public Piramida pyramid;
 
-    public LinkedList<Enemy> enemies;
+    public LinkedList<Enemy> enemies = new LinkedList<Enemy>();
 
 	// Use this for initialization
 	void Start ()
