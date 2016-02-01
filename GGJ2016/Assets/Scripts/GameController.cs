@@ -1,23 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
 
-    private Piramida pyramid;
+    public TowerFieldsHighlight towerFieldsHighlight;
+    public Pyramid pyramid;
+
+    public LinkedList<Enemy> enemies = new LinkedList<Enemy>();
 
 	// Use this for initialization
 	void Start ()
     {
-        pyramid = GetComponent<Piramida>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-	    
-        //TowerFieldsHighlight
+
+        if( Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+        towerFieldsHighlight.GenerateTowers();
 
 	}
+
+
+    
 
 }

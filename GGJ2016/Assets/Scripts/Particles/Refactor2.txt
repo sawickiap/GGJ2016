@@ -1,0 +1,1 @@
+﻿Classes from this folder should be refactored.
