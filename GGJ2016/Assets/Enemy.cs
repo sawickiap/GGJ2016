@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     Vector3 endDirection, endPosition;
     Vector3 currentDirection, currentPosition;
     float currentPercentOfPole;
+    float previousStepPhyramidHeight;
 
     public EnemyType enemyType;
     public int health;
@@ -31,7 +32,6 @@ public class Enemy : MonoBehaviour
     {
 
         // Initiate Enemy
-
 
         RaycastHit raycastHit;
         if (Physics.Raycast(new Ray(transform.position, Physics.gravity), out raycastHit))
@@ -52,12 +52,24 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-	    
+
+        previousStepPhyramidHeight = Piramida.singleton.transform.position.y;
+
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
+
+        if (this.currPole.onPyramid)
+        {
+            Vector3 delta = new Vector3(0.0f, Piramida.singleton.transform.position.y - previousStepPhyramidHeight, 0.0f);
+            startPosition = startPosition + delta;
+            endPosition = endPosition + delta;
+            previousStepPhyramidHeight = Piramida.singleton.transform.position.y;
+        }
+
+        previousStepPhyramidHeight = Piramida.singleton.transform.position.y;
 
         float deltaPercentOfPole = Speed * Time.deltaTime;
         if (currPole.isSchody) deltaPercentOfPole *= 0.5f;
@@ -100,7 +112,9 @@ public class Enemy : MonoBehaviour
         {
             this.transform.position = Vector3.Lerp(startPosition,endPosition,currentPercentOfPole);
         }
+
         currentDirection = Vector3.Lerp(startDirection, endDirection, currentPercentOfPole);
+
         if (nextPole.isSchody)
         {
             currentDirection.y = startDirection.y;
@@ -111,7 +125,12 @@ public class Enemy : MonoBehaviour
                     (currentPercentOfPole - threshold) / (1f - threshold));
             }
         }
-        if (this.humanoid) currentDirection.y = 0.0f;
+
+        if (this.humanoid)
+        {
+            currentDirection.y = 0.0f;
+        }
+
         this.transform.LookAt(this.transform.position + currentDirection);
 //        this.transform.position = startPosition + startDirection*
 //            Vector3.Lerp(startPosition, endPosition, currentPercentOfPole);//startPosition + Vector3.Lerp(startDirection, endDirection, currentPercentOfPole);
