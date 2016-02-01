@@ -27,6 +27,7 @@ public class CameraController : MonoBehaviour
     {
 
         float horzAxis = Input.GetAxis("Horizontal");
+
         if(Mathf.Abs(horzAxis) > Mathf.Epsilon)
         {
             angle += horzAxis * rotationSpeed * Time.deltaTime;

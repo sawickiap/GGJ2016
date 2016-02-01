@@ -3,6 +3,7 @@ using System.Collections;
 
 public class WarriorAnimationDemoFREE : MonoBehaviour 
 {
+
 	public Animator animator;
 
 	float rotationSpeed = 30;
@@ -33,7 +34,7 @@ public class WarriorAnimationDemoFREE : MonoBehaviour
 
         if (enemy != null)
         {
-            this.speed = enemy.Speed;
+            this.speed = enemy.speed;
         }
 
         if( Input.GetKeyDown(KeyCode.Space) )
@@ -98,12 +99,14 @@ public class WarriorAnimationDemoFREE : MonoBehaviour
 	//face character along input direction
 	void RotateTowardMovementDirection()  
 	{
+
 		if (inputVec != Vector3.zero)
 		{
 			transform.rotation = Quaternion.Slerp(transform.rotation,
                                                   Quaternion.LookRotation(targetDirection),
                                                   Time.deltaTime * rotationSpeed);
 		}
+
 	}
 
 	void UpdateMovement()

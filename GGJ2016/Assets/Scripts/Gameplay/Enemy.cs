@@ -11,16 +11,16 @@ public class Enemy : MonoBehaviour
         SPEAR_MAN = 2
     };
 
-    public float Speed = 0.5f; //pola/sekunde
+    public float speed = 0.5f; // fields /per second
     public float offsetY = 0.51f;
 
-    private Pole currPole;
-    private Pole nextPole;
-    public bool humanoid;
+    private Field currField;
+    private Field nextField;
+    public bool isHumanoid;
     Vector3 startDirection, startPosition;
     Vector3 endDirection, endPosition;
     Vector3 currentDirection, currentPosition;
-    float currentPercentOfPole;
+    float currentPercentOfField;
     float previousStepPhyramidHeight;
 
     public EnemyType enemyType;
@@ -36,24 +36,31 @@ public class Enemy : MonoBehaviour
         RaycastHit raycastHit;
         if (Physics.Raycast(new Ray(transform.position, Physics.gravity), out raycastHit))
         {
+
             GameObject gameObject = raycastHit.transform.gameObject;
             if (gameObject)
             {
-                Pole pole = gameObject.GetComponent<Pole>();
-                if (pole)
+
+                Field field = gameObject.GetComponent<Field>();
+                if (field)
                 {
-                    currPole = pole;
-                    nextPole = currPole.GetNastepnik();
-                    endDirection = nextPole.transform.position - currPole.transform.position;
-                    startDirection = endDirection;//wartosc umowna, moze wymyslimy lepiej z poprzednika;
-                    endPosition = (currPole.transform.position + nextPole.transform.position)*0.5f + new Vector3(0f, offsetY, 0f);
+
+                    currField = field;
+                    nextField = currField.GetNastepnik();
+                    endDirection = nextField.transform.position - currField.transform.position;
+                    startDirection = endDirection; //wartosc umowna, moze wymyslimy lepiej z poprzednika;
+                    endPosition = (currField.transform.position + nextField.transform.position)
+                                  * 0.5f + new Vector3(0f, offsetY, 0f);
                     startPosition = endPosition - endDirection;
-                    currentPercentOfPole = 0.5f;
+                    currentPercentOfField = 0.5f;
+
                 }
+
             }
+
         }
 
-        previousStepPhyramidHeight = Piramida.singleton.transform.position.y;
+        previousStepPhyramidHeight = Pyramid.singleton.transform.position.y;
 
 	}
 	
@@ -61,72 +68,94 @@ public class Enemy : MonoBehaviour
 	void Update ()
     {
 
-        if (this.currPole.onPyramid)
+        if (this.currField.onPyramid)
         {
-            Vector3 delta = new Vector3(0.0f, Piramida.singleton.transform.position.y - previousStepPhyramidHeight, 0.0f);
+
+            Vector3 delta = new Vector3(0.0f, Pyramid.singleton.transform.position.y
+                                              - previousStepPhyramidHeight, 0.0f);
             startPosition = startPosition + delta;
             endPosition = endPosition + delta;
-            previousStepPhyramidHeight = Piramida.singleton.transform.position.y;
+            previousStepPhyramidHeight = Pyramid.singleton.transform.position.y;
+
         }
 
-        previousStepPhyramidHeight = Piramida.singleton.transform.position.y;
+        previousStepPhyramidHeight = Pyramid.singleton.transform.position.y;
 
-        float deltaPercentOfPole = Speed * Time.deltaTime;
-        if (currPole.isSchody) deltaPercentOfPole *= 0.5f;
-        currentPercentOfPole += deltaPercentOfPole;
-        if (currentPercentOfPole > 1.0f)
+        float deltaPercentOfPole = speed * Time.deltaTime;
+
+        if (currField.isStairs)
         {
-            currentPercentOfPole = currentPercentOfPole - 1.0f;
+            deltaPercentOfPole *= 0.5f;
+        }
+
+        currentPercentOfField += deltaPercentOfPole;
+
+        if (currentPercentOfField > 1.0f)
+        {
+
+            currentPercentOfField = currentPercentOfField - 1.0f;
             startDirection = endDirection;
             startPosition = endPosition;
-            currPole = nextPole;
-            nextPole = currPole.GetNastepnik();
-            endPosition = (currPole.transform.position + nextPole.transform.position) * 0.5f + new Vector3(0f, offsetY, 0f);
-            endDirection = nextPole.transform.position - currPole.transform.position;
+            currField = nextField;
+            nextField = currField.GetNastepnik();
+            endPosition = (currField.transform.position + nextField.transform.position) * 0.5f
+                          + new Vector3(0f, offsetY, 0f);
+            endDirection = nextField.transform.position - currField.transform.position;
 
-            if (nextPole.isSchody) //jesli to schody
+            if (nextField.isStairs) //jesli to schody
             {
                 endPosition.y = startPosition.y;
                 //endDirection.y = 0.0f;
             }
-            else if (currPole.isSchody)
+            else if (currField.isStairs)
             {
-                endPosition.y = nextPole.transform.position.y + 0.75f;
+                endPosition.y = nextField.transform.position.y + 0.75f;
                 //startDirection = endPosition - startPosition;
                 endDirection = endPosition - startPosition;
             }
+
         }
 
         Vector3 currentDirection;
-        if (!this.currPole.isSchody) {
+        if (!this.currField.isStairs)
+        {
+
             Vector3 midPoint = startPosition + startDirection * 0.5f;
             Vector3 newPosition =
-                startPosition * (1f - currentPercentOfPole) * (1f - currentPercentOfPole) +
-                midPoint * 2f * (1f - currentPercentOfPole) * currentPercentOfPole +
-                endPosition * currentPercentOfPole * currentPercentOfPole;
-            if (this.humanoid)
-                newPosition.y = Mathf.Lerp(startPosition.y, endPosition.y, currentPercentOfPole);
+                startPosition * (1f - currentPercentOfField) * (1f - currentPercentOfField) +
+                midPoint * 2f * (1f - currentPercentOfField) * currentPercentOfField +
+                endPosition * currentPercentOfField * currentPercentOfField;
+
+            if (this.isHumanoid)
+            {
+                newPosition.y = Mathf.Lerp(startPosition.y, endPosition.y, currentPercentOfField);
+            }
+
             this.transform.position = newPosition;
+
         }
         else
         {
-            this.transform.position = Vector3.Lerp(startPosition,endPosition,currentPercentOfPole);
+            this.transform.position = Vector3.Lerp(startPosition,endPosition,currentPercentOfField);
         }
 
-        currentDirection = Vector3.Lerp(startDirection, endDirection, currentPercentOfPole);
+        currentDirection = Vector3.Lerp(startDirection, endDirection, currentPercentOfField);
 
-        if (nextPole.isSchody)
+        if (nextField.isStairs)
         {
+
             currentDirection.y = startDirection.y;
             const float threshold = 0.6f;
-            if(currentPercentOfPole > threshold)
+
+            if(currentPercentOfField > threshold)
             {
                 currentDirection.y = Mathf.Lerp(startDirection.y, endDirection.y,
-                    (currentPercentOfPole - threshold) / (1f - threshold));
+                    (currentPercentOfField - threshold) / (1f - threshold));
             }
+
         }
 
-        if (this.humanoid)
+        if (this.isHumanoid)
         {
             currentDirection.y = 0.0f;
         }
@@ -191,6 +220,7 @@ public class Enemy : MonoBehaviour
                 Color.red,
                 0f,
                 false);
+
     }
 
 }

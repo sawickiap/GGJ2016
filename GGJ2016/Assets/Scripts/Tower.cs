@@ -62,8 +62,6 @@ namespace Assets.Scripts
 
             }
 
-            
-
         }
 
         private Enemy FindNearestEnemyInRange()

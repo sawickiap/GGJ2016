@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
 {
 
     public TowerFieldsHighlight towerFieldsHighlight;
-    public Piramida pyramid;
+    public Pyramid pyramid;
 
     public LinkedList<Enemy> enemies = new LinkedList<Enemy>();
 

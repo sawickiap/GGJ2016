@@ -6,7 +6,7 @@ using Assets.Scripts;
 public class TowerFieldsHighlight : MonoBehaviour
 {
 
-    public Piramida pyramid;
+    public Pyramid pyramid;
     LinkedList<GameObject> gameBlocks;
     public GameController gameController;
 
@@ -20,7 +20,7 @@ public class TowerFieldsHighlight : MonoBehaviour
 
     public Material normalMaterial;
 
-    Pole lastRaytracedField;
+    Field lastRaytracedField;
 
 	// Use this for initialization
 	void Start ()
@@ -47,7 +47,7 @@ public class TowerFieldsHighlight : MonoBehaviour
     public void HighlightTowerPossibleFields()
     {
 
-        Platforma[] platformy = pyramid.platformy;
+        Platform[] platformy = pyramid.platforms;
 
         Shader fieldShader = Shader.Find("Standard");
         Material towerFieldHighlightedMat = new Material(fieldShader);
@@ -58,11 +58,11 @@ public class TowerFieldsHighlight : MonoBehaviour
         for( int i = 0; i < platformy.Length; i ++)
         {
 
-            Platforma platforma = platformy[i];
+            Platform platforma = platformy[i];
 
             AssignTowerFieldsToPlatform(platforma);
 
-            foreach( Pole pole in platforma.fields )
+            foreach( Field pole in platforma.fields )
             {
 
                 Renderer renderer = pole.gameObject.GetComponent<Renderer>();
@@ -74,12 +74,12 @@ public class TowerFieldsHighlight : MonoBehaviour
 
     }
 
-    private void AssignTowerFieldsToPlatform( Platforma platforma )
+    private void AssignTowerFieldsToPlatform( Platform platforma )
     {
 
         if( platforma.fields == null || platforma.fields.Length == 0 )
         {
-            Pole[] fields = platforma.GetComponentsInChildren<Pole>();
+            Field[] fields = platforma.GetComponentsInChildren<Field>();
             platforma.fields = fields;
         }
 
@@ -88,11 +88,11 @@ public class TowerFieldsHighlight : MonoBehaviour
     public void GenerateTowers()
     {
 
-        Pole currentRaytracedField = GetCurrentlyRaytracedField();
+        Field currentRaytracedField = GetCurrentlyRaytracedField();
         if (currentRaytracedField != null)
         {
 
-            if (!currentRaytracedField.poleNaWieze )
+            if (!currentRaytracedField.isFieldForTower )
             {
                 return;
             }
@@ -184,11 +184,12 @@ public class TowerFieldsHighlight : MonoBehaviour
             renderer.material = normalMaterial;
             lastRaytracedField = null;
             newTower.gameObject.transform.parent = currentRaytracedField.transform;
+
         }
 
     }
 
-    private Pole GetCurrentlyRaytracedField()
+    private Field GetCurrentlyRaytracedField()
     {
 
         // Check currently selected object by mouse.
@@ -200,7 +201,7 @@ public class TowerFieldsHighlight : MonoBehaviour
 
             GameObject hitObject = hit.collider.gameObject;
 
-            Pole field = hitObject.GetComponent<Pole>() as Pole;
+            Field field = hitObject.GetComponent<Field>() as Field;
 
             return field;
 
