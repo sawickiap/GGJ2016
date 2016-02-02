@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Enemy : MonoBehaviour
@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
                 {
 
                     currField = field;
-                    nextField = currField.GetNastepnik();
+                    nextField = currField.getSuccessor();
                     endDirection = nextField.transform.position - currField.transform.position;
                     startDirection = endDirection; //wartosc umowna, moze wymyslimy lepiej z poprzednika;
                     endPosition = (currField.transform.position + nextField.transform.position)
@@ -97,7 +97,7 @@ public class Enemy : MonoBehaviour
             startDirection = endDirection;
             startPosition = endPosition;
             currField = nextField;
-            nextField = currField.GetNastepnik();
+            nextField = currField.getSuccessor();
             endPosition = (currField.transform.position + nextField.transform.position) * 0.5f
                           + new Vector3(0f, offsetY, 0f);
             endDirection = nextField.transform.position - currField.transform.position;

@@ -27,6 +27,17 @@ public class Platform : MonoBehaviour
     {
     }
 
+	public int getNumberOfFieldsOnPlatform(){
+		if(ID == 0) return 1;
+		else return 8*ID;
+	}
+
+	public static int getNumberOfFieldsOnPlatform(int platformID){
+		if(platformID == 0) return 1;
+		else return 8*platformID;
+	}
+
+
 	// Use this for initialization
 	void Start ()
     {

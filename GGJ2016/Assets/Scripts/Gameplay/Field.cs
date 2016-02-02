@@ -13,10 +13,10 @@ public class Field : MonoBehaviour
 	// For fields on path that could touch pyramid when it raises up;
 	public bool hasAlternativeOnPyramid = false;
 	public int minPyramidLevelForAlternativeNastepnik;
-	public Field alternativeNastepnikOnPyramid;
+	public Field alternativeSuccessorOnPyramid;
 
     public bool onCrossroads;
-    public int crossroadsNr;
+    public int crossroadID;
     public bool isFieldForTower;
     public bool isStairs;
 
@@ -24,7 +24,7 @@ public class Field : MonoBehaviour
 
     //public GameObject 
 
-    public Field GetNastepnik()
+    public Field getSuccessor()
     {
 
 		if(onPyramid)
@@ -37,17 +37,17 @@ public class Field : MonoBehaviour
             else if (this.onCrossroads)//platforms without stairs and not zero
             {
 
-                int myplatformID = this.platform.ID;
-                Platform nextPlatform = Pyramid.singleton.platforms[myplatformID - 1];
+                int myPlatformID = this.platform.ID;
+                Platform nextPlatform = Pyramid.singleton.platforms[myPlatformID - 1];
 
-                if (nextPlatform.rotation % 2 != crossroadsNr % 2)
+                if (nextPlatform.rotation % 2 != crossroadID % 2)
                 {
                     return successor;
                 }
                 else
                 {
 
-                    if (nextPlatform.rotation == this.crossroadsNr)
+                    if (nextPlatform.rotation == this.crossroadID)
                     {
                         return nextPlatform.stairs1;
                     }
@@ -102,7 +102,7 @@ public class Field : MonoBehaviour
                 int pyramidLevel = Pyramid.singleton.GetLevel();
                 if ( pyramidLevel >= this.minPyramidLevelForAlternativeNastepnik)
                 {
-                    return this.alternativeNastepnikOnPyramid;
+                    return this.alternativeSuccessorOnPyramid;
                 }
                 else
                 {
@@ -121,8 +121,16 @@ public class Field : MonoBehaviour
 	void Start ()
     
     {
-        this.platform = transform.parent.GetComponent<Platform>();
-        Debug.Assert(this.platform != null);
+		if(onPyramid){
+			this.platform = transform.parent.GetComponent<Platform>();
+			Debug.Assert(this.platform != null);
+
+			if(platform.ID % 2 == 1){
+				int idOnPlatform = transform.GetSiblingIndex();
+				this.successor = transform.parent.GetChild( (idOnPlatform+1)%platform.getNumberOfFieldsOnPlatform() ).GetComponent<Field>();
+			}
+			//else this.successor = this;
+		}
 
 	}
 	
@@ -130,13 +138,13 @@ public class Field : MonoBehaviour
 	void Update ()
     {
 
-        Field localNastepnik = GetNastepnik();
-        if (localNastepnik)
+        Field localSuccessor = getSuccessor();
+        if (localSuccessor)
         {
 
             Debug.DrawLine(
                 transform.position,
-                localNastepnik.transform.position,
+                localSuccessor.transform.position,
                 Color.blue,
                 0f,
                 false);
